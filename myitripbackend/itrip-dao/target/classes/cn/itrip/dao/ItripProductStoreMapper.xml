@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripProductStoreMapper">
+
+    <select id="getItripProductStoreById" resultType="cn.itrip.beans.pojo.ItripProductStore" >
+        select
+            id as id , 
+            productType as producttype , 
+            productId as productid , 
+            store as store , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_product_store
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripProductStoreListByMap" resultType="cn.itrip.beans.pojo.ItripProductStore"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            productType as producttype , 
+            productId as productid , 
+            store as store , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_product_store
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="producttype != null and producttype!=''">
+                    and productType=#{producttype}
+                </if>
+                <if test="productid != null and productid!=''">
+                    and productId=#{productid}
+                </if>
+                <if test="store != null and store!=''">
+                    and store=#{store}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripProductStoreCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_product_store
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="producttype != null and producttype!=''">
+                    and productType=#{producttype}
+                </if>
+                <if test="productid != null and productid!=''">
+                    and productId=#{productid}
+                </if>
+                <if test="store != null and store!=''">
+                    and store=#{store}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripProductStore" parameterType="cn.itrip.beans.pojo.ItripProductStore">
+        insert into itrip_product_store(
+            id , 
+            productType , 
+            productId , 
+            store , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{producttype} , 
+            #{productid} , 
+            #{store} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripProductStore" parameterType="cn.itrip.beans.pojo.ItripProductStore">
+        update itrip_product_store
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="producttype != null and producttype!=''">
+                productType=#{producttype},
+            </if>
+            <if test="productid != null and productid!=''">
+                productId=#{productid},
+            </if>
+            <if test="store != null and store!=''">
+                store=#{store},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripProductStoreById" parameterType="Long">
+        delete from itrip_product_store where id = #{id}
+    </delete>
+</mapper>

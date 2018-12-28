@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripLabelDicMapper">
+
+    <select id="getItripLabelDicById" resultType="cn.itrip.beans.pojo.ItripLabelDic" >
+        select
+            id as id , 
+            name as name , 
+            value as value , 
+            description as description , 
+            parentId as parentid , 
+            pic as pic , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_label_dic
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripLabelDicListByMap" resultType="cn.itrip.beans.pojo.ItripLabelDic"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            name as name , 
+            value as value , 
+            description as description , 
+            parentId as parentid , 
+            pic as pic , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_label_dic
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="name != null and name!=''">
+                    and name=#{name}
+                </if>
+                <if test="value != null and value!=''">
+                    and value=#{value}
+                </if>
+                <if test="description != null and description!=''">
+                    and description=#{description}
+                </if>
+                <if test="parentid != null and parentid!=''">
+                    and parentId=#{parentid}
+                </if>
+                <if test="pic != null and pic!=''">
+                    and pic=#{pic}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripLabelDicCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_label_dic
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="name != null and name!=''">
+                    and name=#{name}
+                </if>
+                <if test="value != null and value!=''">
+                    and value=#{value}
+                </if>
+                <if test="description != null and description!=''">
+                    and description=#{description}
+                </if>
+                <if test="parentid != null and parentid!=''">
+                    and parentId=#{parentid}
+                </if>
+                <if test="pic != null and pic!=''">
+                    and pic=#{pic}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripLabelDic" parameterType="cn.itrip.beans.pojo.ItripLabelDic">
+        insert into itrip_label_dic(
+            id , 
+            name , 
+            value , 
+            description , 
+            parentId , 
+            pic , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{name} , 
+            #{value} , 
+            #{description} , 
+            #{parentid} , 
+            #{pic} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripLabelDic" parameterType="cn.itrip.beans.pojo.ItripLabelDic">
+        update itrip_label_dic
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="name != null and name!=''">
+                name=#{name},
+            </if>
+            <if test="value != null and value!=''">
+                value=#{value},
+            </if>
+            <if test="description != null and description!=''">
+                description=#{description},
+            </if>
+            <if test="parentid != null and parentid!=''">
+                parentId=#{parentid},
+            </if>
+            <if test="pic != null and pic!=''">
+                pic=#{pic},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripLabelDicById" parameterType="Long">
+        delete from itrip_label_dic where id = #{id}
+    </delete>
+</mapper>

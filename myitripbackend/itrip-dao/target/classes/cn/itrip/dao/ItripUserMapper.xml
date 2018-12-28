@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripUserMapper">
+
+    <select id="getItripUserById" resultType="cn.itrip.beans.pojo.ItripUser" >
+        select
+            id as id , 
+            userCode as usercode , 
+            userPassword as userpassword , 
+            userType as usertype , 
+            flatID as flatid , 
+            userName as username , 
+            weChat as wechat , 
+            QQ as qq , 
+            weibo as weibo , 
+            baidu as baidu , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby , 
+            activated as activated 
+        from itrip_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripUserListByMap" resultType="cn.itrip.beans.pojo.ItripUser"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            userCode as usercode , 
+            userPassword as userpassword , 
+            userType as usertype , 
+            flatID as flatid , 
+            userName as username , 
+            weChat as wechat , 
+            QQ as qq , 
+            weibo as weibo , 
+            baidu as baidu , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby , 
+            activated as activated 
+        from itrip_user
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="usercode != null and usercode!=''">
+                    and userCode=#{usercode}
+                </if>
+                <if test="userpassword != null and userpassword!=''">
+                    and userPassword=#{userpassword}
+                </if>
+                <if test="usertype != null and usertype!=''">
+                    and userType=#{usertype}
+                </if>
+                <if test="flatid != null and flatid!=''">
+                    and flatID=#{flatid}
+                </if>
+                <if test="username != null and username!=''">
+                    and userName=#{username}
+                </if>
+                <if test="wechat != null and wechat!=''">
+                    and weChat=#{wechat}
+                </if>
+                <if test="qq != null and qq!=''">
+                    and QQ=#{qq}
+                </if>
+                <if test="weibo != null and weibo!=''">
+                    and weibo=#{weibo}
+                </if>
+                <if test="baidu != null and baidu!=''">
+                    and baidu=#{baidu}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+                <if test="activated != null and activated!=''">
+                    and activated=#{activated}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripUserCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_user
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="usercode != null and usercode!=''">
+                    and userCode=#{usercode}
+                </if>
+                <if test="userpassword != null and userpassword!=''">
+                    and userPassword=#{userpassword}
+                </if>
+                <if test="usertype != null and usertype!=''">
+                    and userType=#{usertype}
+                </if>
+                <if test="flatid != null and flatid!=''">
+                    and flatID=#{flatid}
+                </if>
+                <if test="username != null and username!=''">
+                    and userName=#{username}
+                </if>
+                <if test="wechat != null and wechat!=''">
+                    and weChat=#{wechat}
+                </if>
+                <if test="qq != null and qq!=''">
+                    and QQ=#{qq}
+                </if>
+                <if test="weibo != null and weibo!=''">
+                    and weibo=#{weibo}
+                </if>
+                <if test="baidu != null and baidu!=''">
+                    and baidu=#{baidu}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+                <if test="activated != null and activated!=''">
+                    and activated=#{activated}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripUser" parameterType="cn.itrip.beans.pojo.ItripUser">
+        insert into itrip_user(
+            id , 
+            userCode , 
+            userPassword , 
+            userType , 
+            flatID , 
+            userName , 
+            weChat , 
+            QQ , 
+            weibo , 
+            baidu , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy , 
+            activated 
+        )
+        values(
+            #{id} , 
+            #{usercode} , 
+            #{userpassword} , 
+            #{usertype} , 
+            #{flatid} , 
+            #{username} , 
+            #{wechat} , 
+            #{qq} , 
+            #{weibo} , 
+            #{baidu} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} , 
+            #{activated} 
+        )
+    </insert>
+
+    <update id="updateItripUser" parameterType="cn.itrip.beans.pojo.ItripUser">
+        update itrip_user
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="usercode != null and usercode!=''">
+                userCode=#{usercode},
+            </if>
+            <if test="userpassword != null and userpassword!=''">
+                userPassword=#{userpassword},
+            </if>
+            <if test="usertype != null and usertype!=''">
+                userType=#{usertype},
+            </if>
+            <if test="flatid != null and flatid!=''">
+                flatID=#{flatid},
+            </if>
+            <if test="username != null and username!=''">
+                userName=#{username},
+            </if>
+            <if test="wechat != null and wechat!=''">
+                weChat=#{wechat},
+            </if>
+            <if test="qq != null and qq!=''">
+                QQ=#{qq},
+            </if>
+            <if test="weibo != null and weibo!=''">
+                weibo=#{weibo},
+            </if>
+            <if test="baidu != null and baidu!=''">
+                baidu=#{baidu},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+            <if test="activated != null and activated!=''">
+                activated=#{activated},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripUserById" parameterType="Long">
+        delete from itrip_user where id = #{id}
+    </delete>
+</mapper>
