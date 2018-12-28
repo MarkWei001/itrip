@@ -1,0 +1,230 @@
+ 
+<mapper namespace="cn.itrip.dao.ItripAreaDicMapper">
+
+    <select id="getItripAreaDicById" resultType="cn.itrip.beans.pojo.ItripAreaDic" >
+        select
+            id as id , 
+            name as name , 
+            areaNo as areano , 
+            parent as parent , 
+            isActivated as isactivated , 
+            isTradingArea as istradingarea , 
+            isHot as ishot , 
+            level as level , 
+            isChina as ischina , 
+            pinyin as pinyin , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_area_dic
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripAreaDicListByMap" resultType="cn.itrip.beans.pojo.ItripAreaDic"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            name as name , 
+            areaNo as areano , 
+            parent as parent , 
+            isActivated as isactivated , 
+            isTradingArea as istradingarea , 
+            isHot as ishot , 
+            level as level , 
+            isChina as ischina , 
+            pinyin as pinyin , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_area_dic
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="name != null and name!=''">
+                    and name=#{name}
+                </if>
+                <if test="areano != null and areano!=''">
+                    and areaNo=#{areano}
+                </if>
+                <if test="parent != null and parent!=''">
+                    and parent=#{parent}
+                </if>
+                <if test="isactivated != null and isactivated!=''">
+                    and isActivated=#{isactivated}
+                </if>
+                <if test="istradingarea != null and istradingarea!=''">
+                    and isTradingArea=#{istradingarea}
+                </if>
+                <if test="ishot != null and ishot!=''">
+                    and isHot=#{ishot}
+                </if>
+                <if test="level != null and level!=''">
+                    and level=#{level}
+                </if>
+                <if test="ischina != null and ischina!=''">
+                    and isChina=#{ischina}
+                </if>
+                <if test="pinyin != null and pinyin!=''">
+                    and pinyin=#{pinyin}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripAreaDicCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_area_dic
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="name != null and name!=''">
+                    and name=#{name}
+                </if>
+                <if test="areano != null and areano!=''">
+                    and areaNo=#{areano}
+                </if>
+                <if test="parent != null and parent!=''">
+                    and parent=#{parent}
+                </if>
+                <if test="isactivated != null and isactivated!=''">
+                    and isActivated=#{isactivated}
+                </if>
+                <if test="istradingarea != null and istradingarea!=''">
+                    and isTradingArea=#{istradingarea}
+                </if>
+                <if test="ishot != null and ishot!=''">
+                    and isHot=#{ishot}
+                </if>
+                <if test="level != null and level!=''">
+                    and level=#{level}
+                </if>
+                <if test="ischina != null and ischina!=''">
+                    and isChina=#{ischina}
+                </if>
+                <if test="pinyin != null and pinyin!=''">
+                    and pinyin=#{pinyin}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripAreaDic" parameterType="cn.itrip.beans.pojo.ItripAreaDic">
+        insert into itrip_area_dic(
+            id , 
+            name , 
+            areaNo , 
+            parent , 
+            isActivated , 
+            isTradingArea , 
+            isHot , 
+            level , 
+            isChina , 
+            pinyin , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{name} , 
+            #{areano} , 
+            #{parent} , 
+            #{isactivated} , 
+            #{istradingarea} , 
+            #{ishot} , 
+            #{level} , 
+            #{ischina} , 
+            #{pinyin} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripAreaDic" parameterType="cn.itrip.beans.pojo.ItripAreaDic">
+        update itrip_area_dic
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="name != null and name!=''">
+                name=#{name},
+            </if>
+            <if test="areano != null and areano!=''">
+                areaNo=#{areano},
+            </if>
+            <if test="parent != null and parent!=''">
+                parent=#{parent},
+            </if>
+            <if test="isactivated != null and isactivated!=''">
+                isActivated=#{isactivated},
+            </if>
+            <if test="istradingarea != null and istradingarea!=''">
+                isTradingArea=#{istradingarea},
+            </if>
+            <if test="ishot != null and ishot!=''">
+                isHot=#{ishot},
+            </if>
+            <if test="level != null and level!=''">
+                level=#{level},
+            </if>
+            <if test="ischina != null and ischina!=''">
+                isChina=#{ischina},
+            </if>
+            <if test="pinyin != null and pinyin!=''">
+                pinyin=#{pinyin},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripAreaDicById" parameterType="Long">
+        delete from itrip_area_dic where id = #{id}
+    </delete>
+</mapper>

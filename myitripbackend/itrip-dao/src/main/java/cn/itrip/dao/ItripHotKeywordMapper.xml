@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripHotKeywordMapper">
+
+    <select id="getItripHotKeywordById" resultType="cn.itrip.beans.pojo.ItripHotKeyword" >
+        select
+            keyword as keyword , 
+            rank as rank 
+        from itrip_hot_keyword
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripHotKeywordListByMap" resultType="cn.itrip.beans.pojo.ItripHotKeyword"
+            parameterType="java.util.Map">
+        select
+            keyword as keyword , 
+            rank as rank 
+        from itrip_hot_keyword
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="keyword != null and keyword!=''">
+                    and keyword=#{keyword}
+                </if>
+                <if test="rank != null and rank!=''">
+                    and rank=#{rank}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripHotKeywordCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_hot_keyword
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="keyword != null and keyword!=''">
+                    and keyword=#{keyword}
+                </if>
+                <if test="rank != null and rank!=''">
+                    and rank=#{rank}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripHotKeyword" parameterType="cn.itrip.beans.pojo.ItripHotKeyword">
+        insert into itrip_hot_keyword(
+            keyword , 
+            rank 
+        )
+        values(
+            #{keyword} , 
+            #{rank} 
+        )
+    </insert>
+
+    <update id="updateItripHotKeyword" parameterType="cn.itrip.beans.pojo.ItripHotKeyword">
+        update itrip_hot_keyword
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="keyword != null and keyword!=''">
+                keyword=#{keyword},
+            </if>
+            <if test="rank != null and rank!=''">
+                rank=#{rank},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripHotKeywordById" parameterType="Long">
+        delete from itrip_hot_keyword where id = #{id}
+    </delete>
+</mapper>

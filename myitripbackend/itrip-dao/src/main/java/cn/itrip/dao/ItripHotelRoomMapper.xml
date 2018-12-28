@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripHotelRoomMapper">
+
+    <select id="getItripHotelRoomById" resultType="cn.itrip.beans.pojo.ItripHotelRoom" >
+        select
+            id as id , 
+            hotelId as hotelid , 
+            roomTitle as roomtitle , 
+            roomPrice as roomprice , 
+            roomBedTypeId as roombedtypeid , 
+            isHavingBreakfast as ishavingbreakfast , 
+            payType as paytype , 
+            satisfaction as satisfaction , 
+            isBook as isbook , 
+            isCancel as iscancel , 
+            isTimelyResponse as istimelyresponse , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_hotel_room
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripHotelRoomListByMap" resultType="cn.itrip.beans.pojo.ItripHotelRoom"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            hotelId as hotelid , 
+            roomTitle as roomtitle , 
+            roomPrice as roomprice , 
+            roomBedTypeId as roombedtypeid , 
+            isHavingBreakfast as ishavingbreakfast , 
+            payType as paytype , 
+            satisfaction as satisfaction , 
+            isBook as isbook , 
+            isCancel as iscancel , 
+            isTimelyResponse as istimelyresponse , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_hotel_room
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="hotelid != null and hotelid!=''">
+                    and hotelId=#{hotelid}
+                </if>
+                <if test="roomtitle != null and roomtitle!=''">
+                    and roomTitle=#{roomtitle}
+                </if>
+                <if test="roomprice != null and roomprice!=''">
+                    and roomPrice=#{roomprice}
+                </if>
+                <if test="roombedtypeid != null and roombedtypeid!=''">
+                    and roomBedTypeId=#{roombedtypeid}
+                </if>
+                <if test="ishavingbreakfast != null and ishavingbreakfast!=''">
+                    and isHavingBreakfast=#{ishavingbreakfast}
+                </if>
+                <if test="paytype != null and paytype!=''">
+                    and payType=#{paytype}
+                </if>
+                <if test="satisfaction != null and satisfaction!=''">
+                    and satisfaction=#{satisfaction}
+                </if>
+                <if test="isbook != null and isbook!=''">
+                    and isBook=#{isbook}
+                </if>
+                <if test="iscancel != null and iscancel!=''">
+                    and isCancel=#{iscancel}
+                </if>
+                <if test="istimelyresponse != null and istimelyresponse!=''">
+                    and isTimelyResponse=#{istimelyresponse}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripHotelRoomCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_hotel_room
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="hotelid != null and hotelid!=''">
+                    and hotelId=#{hotelid}
+                </if>
+                <if test="roomtitle != null and roomtitle!=''">
+                    and roomTitle=#{roomtitle}
+                </if>
+                <if test="roomprice != null and roomprice!=''">
+                    and roomPrice=#{roomprice}
+                </if>
+                <if test="roombedtypeid != null and roombedtypeid!=''">
+                    and roomBedTypeId=#{roombedtypeid}
+                </if>
+                <if test="ishavingbreakfast != null and ishavingbreakfast!=''">
+                    and isHavingBreakfast=#{ishavingbreakfast}
+                </if>
+                <if test="paytype != null and paytype!=''">
+                    and payType=#{paytype}
+                </if>
+                <if test="satisfaction != null and satisfaction!=''">
+                    and satisfaction=#{satisfaction}
+                </if>
+                <if test="isbook != null and isbook!=''">
+                    and isBook=#{isbook}
+                </if>
+                <if test="iscancel != null and iscancel!=''">
+                    and isCancel=#{iscancel}
+                </if>
+                <if test="istimelyresponse != null and istimelyresponse!=''">
+                    and isTimelyResponse=#{istimelyresponse}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripHotelRoom" parameterType="cn.itrip.beans.pojo.ItripHotelRoom">
+        insert into itrip_hotel_room(
+            id , 
+            hotelId , 
+            roomTitle , 
+            roomPrice , 
+            roomBedTypeId , 
+            isHavingBreakfast , 
+            payType , 
+            satisfaction , 
+            isBook , 
+            isCancel , 
+            isTimelyResponse , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{hotelid} , 
+            #{roomtitle} , 
+            #{roomprice} , 
+            #{roombedtypeid} , 
+            #{ishavingbreakfast} , 
+            #{paytype} , 
+            #{satisfaction} , 
+            #{isbook} , 
+            #{iscancel} , 
+            #{istimelyresponse} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripHotelRoom" parameterType="cn.itrip.beans.pojo.ItripHotelRoom">
+        update itrip_hotel_room
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="hotelid != null and hotelid!=''">
+                hotelId=#{hotelid},
+            </if>
+            <if test="roomtitle != null and roomtitle!=''">
+                roomTitle=#{roomtitle},
+            </if>
+            <if test="roomprice != null and roomprice!=''">
+                roomPrice=#{roomprice},
+            </if>
+            <if test="roombedtypeid != null and roombedtypeid!=''">
+                roomBedTypeId=#{roombedtypeid},
+            </if>
+            <if test="ishavingbreakfast != null and ishavingbreakfast!=''">
+                isHavingBreakfast=#{ishavingbreakfast},
+            </if>
+            <if test="paytype != null and paytype!=''">
+                payType=#{paytype},
+            </if>
+            <if test="satisfaction != null and satisfaction!=''">
+                satisfaction=#{satisfaction},
+            </if>
+            <if test="isbook != null and isbook!=''">
+                isBook=#{isbook},
+            </if>
+            <if test="iscancel != null and iscancel!=''">
+                isCancel=#{iscancel},
+            </if>
+            <if test="istimelyresponse != null and istimelyresponse!=''">
+                isTimelyResponse=#{istimelyresponse},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripHotelRoomById" parameterType="Long">
+        delete from itrip_hotel_room where id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripHotCityMapper">
+
+    <select id="getItripHotCityById" resultType="cn.itrip.beans.pojo.ItripHotCity" >
+        select
+            city as city , 
+            rank as rank 
+        from itrip_hot_city
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripHotCityListByMap" resultType="cn.itrip.beans.pojo.ItripHotCity"
+            parameterType="java.util.Map">
+        select
+            city as city , 
+            rank as rank 
+        from itrip_hot_city
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="city != null and city!=''">
+                    and city=#{city}
+                </if>
+                <if test="rank != null and rank!=''">
+                    and rank=#{rank}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripHotCityCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_hot_city
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="city != null and city!=''">
+                    and city=#{city}
+                </if>
+                <if test="rank != null and rank!=''">
+                    and rank=#{rank}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripHotCity" parameterType="cn.itrip.beans.pojo.ItripHotCity">
+        insert into itrip_hot_city(
+            city , 
+            rank 
+        )
+        values(
+            #{city} , 
+            #{rank} 
+        )
+    </insert>
+
+    <update id="updateItripHotCity" parameterType="cn.itrip.beans.pojo.ItripHotCity">
+        update itrip_hot_city
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="city != null and city!=''">
+                city=#{city},
+            </if>
+            <if test="rank != null and rank!=''">
+                rank=#{rank},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripHotCityById" parameterType="Long">
+        delete from itrip_hot_city where id = #{id}
+    </delete>
+</mapper>

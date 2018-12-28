@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripHotelFeatureMapper">
+
+    <select id="getItripHotelFeatureById" resultType="cn.itrip.beans.pojo.ItripHotelFeature" >
+        select
+            id as id , 
+            hotelId as hotelid , 
+            featureId as featureid , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_hotel_feature
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripHotelFeatureListByMap" resultType="cn.itrip.beans.pojo.ItripHotelFeature"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            hotelId as hotelid , 
+            featureId as featureid , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_hotel_feature
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="hotelid != null and hotelid!=''">
+                    and hotelId=#{hotelid}
+                </if>
+                <if test="featureid != null and featureid!=''">
+                    and featureId=#{featureid}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripHotelFeatureCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_hotel_feature
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="hotelid != null and hotelid!=''">
+                    and hotelId=#{hotelid}
+                </if>
+                <if test="featureid != null and featureid!=''">
+                    and featureId=#{featureid}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripHotelFeature" parameterType="cn.itrip.beans.pojo.ItripHotelFeature">
+        insert into itrip_hotel_feature(
+            id , 
+            hotelId , 
+            featureId , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{hotelid} , 
+            #{featureid} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripHotelFeature" parameterType="cn.itrip.beans.pojo.ItripHotelFeature">
+        update itrip_hotel_feature
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="hotelid != null and hotelid!=''">
+                hotelId=#{hotelid},
+            </if>
+            <if test="featureid != null and featureid!=''">
+                featureId=#{featureid},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripHotelFeatureById" parameterType="Long">
+        delete from itrip_hotel_feature where id = #{id}
+    </delete>
+</mapper>

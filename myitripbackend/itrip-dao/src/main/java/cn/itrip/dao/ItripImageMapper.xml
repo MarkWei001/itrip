@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripImageMapper">
+
+    <select id="getItripImageById" resultType="cn.itrip.beans.pojo.ItripImage" >
+        select
+            id as id , 
+            type as type , 
+            targetId as targetid , 
+            position as position , 
+            imgUrl as imgurl , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_image
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripImageListByMap" resultType="cn.itrip.beans.pojo.ItripImage"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            type as type , 
+            targetId as targetid , 
+            position as position , 
+            imgUrl as imgurl , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_image
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="type != null and type!=''">
+                    and type=#{type}
+                </if>
+                <if test="targetid != null and targetid!=''">
+                    and targetId=#{targetid}
+                </if>
+                <if test="position != null and position!=''">
+                    and position=#{position}
+                </if>
+                <if test="imgurl != null and imgurl!=''">
+                    and imgUrl=#{imgurl}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripImageCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_image
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="type != null and type!=''">
+                    and type=#{type}
+                </if>
+                <if test="targetid != null and targetid!=''">
+                    and targetId=#{targetid}
+                </if>
+                <if test="position != null and position!=''">
+                    and position=#{position}
+                </if>
+                <if test="imgurl != null and imgurl!=''">
+                    and imgUrl=#{imgurl}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripImage" parameterType="cn.itrip.beans.pojo.ItripImage">
+        insert into itrip_image(
+            id , 
+            type , 
+            targetId , 
+            position , 
+            imgUrl , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{type} , 
+            #{targetid} , 
+            #{position} , 
+            #{imgurl} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripImage" parameterType="cn.itrip.beans.pojo.ItripImage">
+        update itrip_image
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="type != null and type!=''">
+                type=#{type},
+            </if>
+            <if test="targetid != null and targetid!=''">
+                targetId=#{targetid},
+            </if>
+            <if test="position != null and position!=''">
+                position=#{position},
+            </if>
+            <if test="imgurl != null and imgurl!=''">
+                imgUrl=#{imgurl},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripImageById" parameterType="Long">
+        delete from itrip_image where id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.ItripOrderLinkUserMapper">
+
+    <select id="getItripOrderLinkUserById" resultType="cn.itrip.beans.pojo.ItripOrderLinkUser" >
+        select
+            id as id , 
+            orderId as orderid , 
+            linkUserId as linkuserid , 
+            linkUserName as linkusername , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_order_link_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getItripOrderLinkUserListByMap" resultType="cn.itrip.beans.pojo.ItripOrderLinkUser"
+            parameterType="java.util.Map">
+        select
+            id as id , 
+            orderId as orderid , 
+            linkUserId as linkuserid , 
+            linkUserName as linkusername , 
+            creationDate as creationdate , 
+            createdBy as createdby , 
+            modifyDate as modifydate , 
+            modifiedBy as modifiedby 
+        from itrip_order_link_user
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="orderid != null and orderid!=''">
+                    and orderId=#{orderid}
+                </if>
+                <if test="linkuserid != null and linkuserid!=''">
+                    and linkUserId=#{linkuserid}
+                </if>
+                <if test="linkusername != null and linkusername!=''">
+                    and linkUserName=#{linkusername}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripOrderLinkUserCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from itrip_order_link_user
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="orderid != null and orderid!=''">
+                    and orderId=#{orderid}
+                </if>
+                <if test="linkuserid != null and linkuserid!=''">
+                    and linkUserId=#{linkuserid}
+                </if>
+                <if test="linkusername != null and linkusername!=''">
+                    and linkUserName=#{linkusername}
+                </if>
+                <if test="creationdate != null and creationdate!=''">
+                    and creationDate=#{creationdate}
+                </if>
+                <if test="createdby != null and createdby!=''">
+                    and createdBy=#{createdby}
+                </if>
+                <if test="modifydate != null and modifydate!=''">
+                    and modifyDate=#{modifydate}
+                </if>
+                <if test="modifiedby != null and modifiedby!=''">
+                    and modifiedBy=#{modifiedby}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertItripOrderLinkUser" parameterType="cn.itrip.beans.pojo.ItripOrderLinkUser">
+        insert into itrip_order_link_user(
+            id , 
+            orderId , 
+            linkUserId , 
+            linkUserName , 
+            creationDate , 
+            createdBy , 
+            modifyDate , 
+            modifiedBy 
+        )
+        values(
+            #{id} , 
+            #{orderid} , 
+            #{linkuserid} , 
+            #{linkusername} , 
+            #{creationdate} , 
+            #{createdby} , 
+            #{modifydate} , 
+            #{modifiedby} 
+        )
+    </insert>
+
+    <update id="updateItripOrderLinkUser" parameterType="cn.itrip.beans.pojo.ItripOrderLinkUser">
+        update itrip_order_link_user
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="id != null and id!=''">
+                id=#{id},
+            </if>
+            <if test="orderid != null and orderid!=''">
+                orderId=#{orderid},
+            </if>
+            <if test="linkuserid != null and linkuserid!=''">
+                linkUserId=#{linkuserid},
+            </if>
+            <if test="linkusername != null and linkusername!=''">
+                linkUserName=#{linkusername},
+            </if>
+            <if test="creationdate != null and creationdate!=''">
+                creationDate=#{creationdate},
+            </if>
+            <if test="createdby != null and createdby!=''">
+                createdBy=#{createdby},
+            </if>
+            <if test="modifydate != null and modifydate!=''">
+                modifyDate=#{modifydate},
+            </if>
+            <if test="modifiedby != null and modifiedby!=''">
+                modifiedBy=#{modifiedby},
+            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteItripOrderLinkUserById" parameterType="Long">
+        delete from itrip_order_link_user where id = #{id}
+    </delete>
+</mapper>
